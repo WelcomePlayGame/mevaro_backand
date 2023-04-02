@@ -5,8 +5,9 @@ import com.mevaro.mevaro.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @Transactional(readOnly = true)
@@ -22,9 +23,21 @@ public class CategoryService {
     }
 
     @Transactional
-    public Category addCategory(Category category) {
-        Optional<Category>  newCategory = Optional.of(repository.save(category));
-        return newCategory.orElse(null);
+    public Category addCategory(String title, String url, byte [] photo) {
+        Category category = new Category();
+        category.setTitle(title);
+        category.setUrl(url);
+        category.setPhoto(photo);
+        category.setCreatedAt(Instant.now());
+        return repository.save(category);
     }
 
+    @Transactional
+    public void deleteCategoryById(long id) {
+       repository.deleteById(id);
+    }
+    @Transactional
+    public void deleteCatagoriesAll() {
+        repository.deleteAll();
+    }
 }
