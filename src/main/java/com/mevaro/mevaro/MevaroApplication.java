@@ -12,7 +12,7 @@ public class MevaroApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MevaroApplication.class, args);
-		System.out.println("Mevaro : Add Categories");
+		System.out.println("Mevaro : 2");
 
 	}
 
